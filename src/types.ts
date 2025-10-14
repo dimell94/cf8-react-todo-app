@@ -1,4 +1,4 @@
-import type {RefObject} from "react";
+import type {ReactNode, RefObject} from "react";
 
 export type TodoProps = {
     id: number;
@@ -24,4 +24,11 @@ export type TodoListProps = {
     editTodo: (id: number, newText: string) => void;
     toggleTodo: (id: number) => void;
 
+}
+
+export type IconButtonProps = {
+    onClick?: () => void;
+    disabled?: boolean;
+    icon: ReactNode
+    addClasses?: string;
 }
