@@ -32,3 +32,9 @@ export type IconButtonProps = {
     icon: ReactNode
     addClasses?: string;
 }
+
+export type TodoStatsProps = {
+    total: number;
+    active: number;
+    completed: number;
+}

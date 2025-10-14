@@ -2,6 +2,7 @@ import {useRef, useState} from "react";
 import TodoForm from "./TodoForm.tsx";
 import type {TodoProps} from "../../types.ts";
 import TodoList from "./TodoList.tsx";
+import TodoStats from "./TodoStats.tsx";
 
 const TodoApp = ()=> {
    const [todos, setTodos] = useState<TodoProps[]>([]);
@@ -31,6 +32,10 @@ const TodoApp = ()=> {
        ))
    }
 
+   const totalTasks = todos.length;
+   const completedTasks = todos.filter(t => t.completed).length;
+   const activeTasks = totalTasks - completedTasks;
+
     return (
         <>
             <div className="max-w-sm mx-auto">
@@ -45,6 +50,18 @@ const TodoApp = ()=> {
                 deleteTodo={deleteTodo}
                 editTodo={editTodo}
                 toggleTodo={toggleTodo}/>
+
+                {totalTasks > 0 && (
+                    <TodoStats
+                        total={totalTasks}
+                        active={activeTasks}
+                        completed={completedTasks}
+                    />
+                )}
+
+
+
+
                 {/* Component: TodoStats*/}
                 {/* Component: Button*/}
 
