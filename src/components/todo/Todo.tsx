@@ -5,8 +5,13 @@ import TodoList from "./TodoList.tsx";
 import TodoStats from "./TodoStats.tsx";
 import Button from "../ui/Button.tsx";
 
+const getInitialTodos = (): TodoProps[] => {
+    const stored = localStorage.getItem("todos");
+    return stored ? JSON.parse(stored) : [];
+}
+
 const TodoApp = ()=> {
-   const [todos, setTodos] = useState<TodoProps[]>([]);
+   const [todos, setTodos] = useState<TodoProps[]>(getInitialTodos());
 
    const inputRef = useRef<HTMLInputElement>(null);
 
@@ -43,6 +48,7 @@ const TodoApp = ()=> {
    const activeTasks = totalTasks - completedTasks;
 
    useEffect(() => {
+       localStorage.setItem("todos", JSON.stringify(todos));
        inputRef.current?.focus();
    }, [todos])
 
